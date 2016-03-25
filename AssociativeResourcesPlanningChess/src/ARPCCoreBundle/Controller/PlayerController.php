@@ -69,7 +69,8 @@ class PlayerController extends Controller
     
     public function showAllAction()
     {
-        $players =$this->getDoctrine()->getRepository('ARPCCoreBundle:Player')->findAll();
+        $clubCode = $this->get('arpc.environnement')->getClub();
+        $players =$this->getDoctrine()->getRepository('ARPCCoreBundle:Player')->findAllPlayersByClub($clubCode);
         
         return $this->render('ARPCCoreBundle:Player:list.html.twig', array(
             'players' => $players,));

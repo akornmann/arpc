@@ -10,4 +10,15 @@ namespace ARPCCoreBundle\Repository;
  */
 class PlayerRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllPlayersByClub($clubCode)
+    {
+        $qb = $this
+            ->createQueryBuilder('player')
+            ->join('player.club', 'club')
+            ->addSelect('club')
+            ->where('club.code = :code')
+            ->setParameter('code', $clubCode);
+
+        return $qb->getQuery()->getResult();
+    }
 }
