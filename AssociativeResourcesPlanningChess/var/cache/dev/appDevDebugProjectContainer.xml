@@ -15,7 +15,7 @@
       <parameter key="SwiftmailerBundle">Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle</parameter>
       <parameter key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
-      <parameter key="AppBundle">AppBundle\AppBundle</parameter>
+      <parameter key="ARPCCoreBundle">ARPCCoreBundle\ARPCCoreBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -25,7 +25,7 @@
     <parameter key="kernel.container_class">appDevDebugProjectContainer</parameter>
     <parameter key="database_host">127.0.0.1</parameter>
     <parameter key="database_port">null</parameter>
-    <parameter key="database_name">symfony</parameter>
+    <parameter key="database_name">arpc</parameter>
     <parameter key="database_user">root</parameter>
     <parameter key="database_password">null</parameter>
     <parameter key="mailer_transport">smtp</parameter>
@@ -370,6 +370,10 @@
     </parameter>
   </parameters>
   <services>
+    <service id="arpc.environnement" class="ARPCCoreBundle\Services\Environnement\ARPCEnvironnement"/>
+    <service id="arpc.player_csv_import" class="ARPCCoreBundle\Services\Csv\PlayerCsvImport">
+      <argument type="service" id="doctrine.orm.default_entity_manager"/>
+    </service>
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
       <argument type="service" id="kernel"/>
@@ -1487,7 +1491,7 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>56d3202ec196f1.44402922</argument>
+            <argument>56eef29aaa0217.47574509</argument>
           </service>
         </argument>
       </argument>
@@ -1616,7 +1620,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.token_storage"/>
-            <argument>56d3202ec196f1.44402922</argument>
+            <argument>56eef29aaa0217.47574509</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>
@@ -1916,7 +1920,7 @@
         <argument key="driver">pdo_mysql</argument>
         <argument key="host">127.0.0.1</argument>
         <argument key="port">null</argument>
-        <argument key="dbname">symfony</argument>
+        <argument key="dbname">arpc</argument>
         <argument key="user">root</argument>
         <argument key="password">null</argument>
         <argument key="charset">UTF8</argument>
@@ -2003,7 +2007,9 @@
       <argument type="service">
         <service class="Doctrine\ORM\Configuration" public="false">
           <call method="setEntityNamespaces">
-            <argument type="collection"/>
+            <argument type="collection">
+              <argument key="ARPCCoreBundle">ARPCCoreBundle\Entity</argument>
+            </argument>
           </call>
           <call method="setMetadataCacheImpl">
             <argument type="service" id="doctrine_cache.providers.doctrine.orm.default_metadata_cache"/>
@@ -2016,7 +2022,19 @@
           </call>
           <call method="setMetadataDriverImpl">
             <argument type="service">
-              <service class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false"/>
+              <service class="Doctrine\Common\Persistence\Mapping\Driver\MappingDriverChain" public="false">
+                <call method="addDriver">
+                  <argument type="service">
+                    <service class="Doctrine\ORM\Mapping\Driver\AnnotationDriver" public="false">
+                      <argument type="service" id="annotation_reader"/>
+                      <argument type="collection">
+                        <argument>D:\Documents\repositories\arpc\AssociativeResourcesPlanningChess\src\ARPCCoreBundle\Entity</argument>
+                      </argument>
+                    </service>
+                  </argument>
+                  <argument>ARPCCoreBundle\Entity</argument>
+                </call>
+              </service>
             </argument>
           </call>
           <call method="setProxyDir">
@@ -2401,6 +2419,10 @@
       <call method="addPath">
         <argument>D:\Documents\repositories\arpc\AssociativeResourcesPlanningChess\vendor\doctrine\doctrine-bundle/Resources/views</argument>
         <argument>Doctrine</argument>
+      </call>
+      <call method="addPath">
+        <argument>D:\Documents\repositories\arpc\AssociativeResourcesPlanningChess\src\ARPCCoreBundle/Resources/views</argument>
+        <argument>ARPCCore</argument>
       </call>
       <call method="addPath">
         <argument>D:\Documents\repositories\arpc\AssociativeResourcesPlanningChess\vendor\symfony\symfony\src\Symfony\Bundle\DebugBundle/Resources/views</argument>

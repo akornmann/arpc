@@ -1,0 +1,9 @@
+{# src/ARPCCoreBundle/Resources/views/Club/main.html.twig #}
+
+{% extends "ARPCCoreBundle::index.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ club.code }}{% endblock %}
+
+{% block body %}
+    {{ include('ARPCCoreBundle:Club:show.html.twig', { 'club' : club }) }}
+{% endblock %}

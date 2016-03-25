@@ -1,0 +1,28 @@
+club_main:
+    path:     /
+    defaults: { _controller: ARPCCoreBundle:Club:index }
+    
+club_show_player_list:
+    path:     /players
+    defaults: { _controller: ARPCCoreBundle:Player:showAll }
+    
+club_import_player_list:
+    path:     /player/import
+    defaults: { _controller: ARPCCoreBundle:Player:import }
+    
+club_add_player:
+    path:     /player/add
+    defaults: { _controller: ARPCCoreBundle:Player:add }
+    
+club_edit_player:
+    path:     /player/edit/{id}
+    defaults: { _controller: ARPCCoreBundle:Player:edit }
+    requirements:
+        id: \d+
+
+club_show_player:
+    path:     /player/{id}
+    defaults: { _controller: ARPCCoreBundle:Player:show }
+    requirements:
+        id: \d+
+    

@@ -100,13 +100,44 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // homepage
-        if (rtrim($pathinfo, '/') === '') {
-            if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'homepage');
+        if (0 === strpos($pathinfo, '/club')) {
+            // club_main
+            if (rtrim($pathinfo, '/') === '/club') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'club_main');
+                }
+
+                return array (  '_controller' => 'ARPCCoreBundle\\Controller\\ClubController::indexAction',  '_route' => 'club_main',);
             }
 
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
+            if (0 === strpos($pathinfo, '/club/player')) {
+                // club_show_player_list
+                if ($pathinfo === '/club/players') {
+                    return array (  '_controller' => 'ARPCCoreBundle\\Controller\\PlayerController::showAllAction',  '_route' => 'club_show_player_list',);
+                }
+
+                // club_import_player_list
+                if ($pathinfo === '/club/player/import') {
+                    return array (  '_controller' => 'ARPCCoreBundle\\Controller\\PlayerController::importAction',  '_route' => 'club_import_player_list',);
+                }
+
+                // club_add_player
+                if ($pathinfo === '/club/player/add') {
+                    return array (  '_controller' => 'ARPCCoreBundle\\Controller\\PlayerController::addAction',  '_route' => 'club_add_player',);
+                }
+
+                // club_edit_player
+                if (0 === strpos($pathinfo, '/club/player/edit') && preg_match('#^/club/player/edit/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'club_edit_player')), array (  '_controller' => 'ARPCCoreBundle\\Controller\\PlayerController::editAction',));
+                }
+
+                // club_show_player
+                if (preg_match('#^/club/player/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'club_show_player')), array (  '_controller' => 'ARPCCoreBundle\\Controller\\PlayerController::showAction',));
+                }
+
+            }
+
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

@@ -1,0 +1,12 @@
+services:
+#    arpc_core.example:
+#        class: ARPCCoreBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+
+    arpc.environnement:
+        class: ARPCCoreBundle\Services\Environnement\ARPCEnvironnement
+        arguments: []
+
+    arpc.player_csv_import:
+        class: ARPCCoreBundle\Services\Csv\PlayerCsvImport
+        arguments: ["@doctrine.orm.entity_manager"]
