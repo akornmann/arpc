@@ -31,7 +31,6 @@
                                     <th>FFE Code</th>
                                     <th>FIDE Code</th>
                                     <th></th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,7 +40,6 @@
                                         <td>{{ player.surname }}</td>
                                         <td>{{ player.ffeCode }}</td>
                                         <td>{{ player.fideCode }}</td>
-                                        <td><a href="{{ path('club_edit_player', {'id' : player.id}) }}">Edit</a></td>
                                         <td><a href="{{ path('club_show_player', {'id' : player.id}) }}">Details</a></td>
                                     </tr>
                                 {% endfor %}

@@ -47,7 +47,7 @@ class PlayerController extends Controller
             $em->persist($player);
             $em->flush();
 
-            return $this->redirectToRoute('club_show_player_list');
+            return $this->redirectToRoute('club_show_player', array('id' => $player->getId()));
         }
         
         return $this->render('ARPCCoreBundle:Player:add.html.twig', array(
@@ -63,10 +63,8 @@ class PlayerController extends Controller
             throw $this->createNotFoundException('No player found for id '.$id);
         }
         
-        $players = array($player);
-        
-        return $this->render('ARPCCoreBundle:Player:list.html.twig', array(
-            'players' => $players,));
+        return $this->render('ARPCCoreBundle:Player:details.html.twig', array(
+            'player' => $player,));
     }
     
     public function showAllAction()
