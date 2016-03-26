@@ -13,4 +13,9 @@ class ARPCEnvironnement
     {
         return "FRA";
     }
+    
+    public function getMailSender()
+    {
+        return "kornmannalexandre@wanadoo.fr";
+    }
 }

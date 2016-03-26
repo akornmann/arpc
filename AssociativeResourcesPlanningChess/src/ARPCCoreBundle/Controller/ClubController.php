@@ -8,10 +8,10 @@ class ClubController extends Controller
 {
     public function indexAction()
     {
-        $clubs = $this->getDoctrine()->getRepository('ARPCCoreBundle:Club')->findAll();
+        $clubCode = $this->get('arpc.environnement')->getClub();
+        $club = $this->getDoctrine()->getRepository('ARPCCoreBundle:Club')->findClubByCode($clubCode);
         
-        $club = $clubs[0];
-                
+        
         return $this->render('ARPCCoreBundle:Club:main.html.twig', array(
             'club' => $club));
     }

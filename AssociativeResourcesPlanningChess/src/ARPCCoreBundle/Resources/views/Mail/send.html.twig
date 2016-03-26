@@ -1,0 +1,10 @@
+{# src/ARPCCoreBundle/Resources/views/Mail/send.html.twig #}
+
+{% extends "ARPCCoreBundle::index.html.twig" %}
+
+{% block title %}{{ parent() }} - Envoyer un mail{% endblock %}
+
+
+{% block body %}
+    {{ form(form) }}
+{% endblock %}

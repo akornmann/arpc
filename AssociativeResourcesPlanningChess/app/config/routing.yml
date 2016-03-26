@@ -1,3 +1,7 @@
-core_bundle:
-    resource: "@ARPCCoreBundle/Resources/config/routing.yml"
+core_bundle_club:
+    resource: "@ARPCCoreBundle/Resources/config/routing_club.yml"
     prefix: /club
+    
+core_bundle_mail:
+    resource: "@ARPCCoreBundle/Resources/config/routing_mail.yml"
+    prefix: /mail

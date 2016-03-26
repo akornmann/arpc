@@ -26,3 +26,6 @@ club_show_player:
     requirements:
         id: \d+
     
+club_send_mail:
+    path:     /mail
+    defaults: { _controller: ARPCCoreBundle:Player:sendMail }

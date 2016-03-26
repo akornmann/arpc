@@ -11,7 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="ARPCCoreBundle\Repository\ContactWayRepository")
  */
 class ContactWay
-{
+{     
+    const MAIL = "mail";
+    const PHONE = "phone";
+    const FACEBOOK = "facebook";
+    
     /**
      * @var int
      *
@@ -34,7 +38,7 @@ class ContactWay
      * @ORM\Column(name="label", type="string", length=255)
      */
     private $label;
-
+    
     /**
      * Get id
      *

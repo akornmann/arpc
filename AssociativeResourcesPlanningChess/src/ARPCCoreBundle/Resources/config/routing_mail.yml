@@ -1,0 +1,3 @@
+mail_send:
+    path:     /{to}
+    defaults: { _controller: ARPCCoreBundle:Mail:send }
