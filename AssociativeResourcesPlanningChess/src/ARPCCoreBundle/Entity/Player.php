@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="player")
  * @ORM\Entity(repositoryClass="ARPCCoreBundle\Repository\PlayerRepository")
  */
-class Player
+class Player implements \Symfony\Component\Security\Core\User\UserInterface
 {
     /**
      * @var int
@@ -82,14 +82,95 @@ class Player
     private $contactWays;
 
     /**
+     * @var type 
+     */
+    private $roles;
+    
+    /**
+     * @var type 
+     */
+    private $password;
+    
+    /**
+     * @var type 
+     */
+    private $salt;
+    
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->birthday = new \DateTime();
         $this->contactWays = new \Doctrine\Common\Collections\ArrayCollection();
+        
+        // Default role
+        $this->roles = array("ROLE_USER");
+        $this->salt = null;
+        $this->password = '$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC';
     }
+    
+    /**
+     * Implements UserInterface
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+        
+    /**
+     * Implements UserInterface
+     */
+    public function getPassword()
+    {
+        return $this->password;    
+    }
+    
+    /**
+     * Implements UserInterface
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+    
+    /**
+     * Implements UserInterface
+     */
+    public function getUsername()
+    {
+        return $this->ffeCode;
+    }
+    
+    /**
+     * Implements UserInterface
+     */
+    public function eraseCredentials()
+    {
+    }
+    
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->ffeCode,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }    
 
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->ffeCode,
+            $this->password,
+        ) = unserialize($serialized);
+    }
+    
     /**
      * Get id
      *

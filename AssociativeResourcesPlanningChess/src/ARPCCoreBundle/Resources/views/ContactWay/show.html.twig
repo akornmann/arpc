@@ -3,7 +3,7 @@
 <div class="panel panel-green">
     <div class="panel-body">
         {% if contactWay.type == "mail" %}
-            <a href="{{ path('mail_send', {'mail' : contactWay.label}) }}"> <img src="{{ asset('png/mail.png') }}" alt="Send mail" /></a>
+            <a href="{{ path('mail_send', {'to' : contactWay.label}) }}"> <img src="{{ asset('png/mail.png') }}" alt="Send mail" /></a>
         {% endif %}
         {% if contactWay.type == "phone" %}
             <a href=""> <img src="{{ asset('png/phone.png') }}" alt="Send sms" /></a>

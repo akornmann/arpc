@@ -5,3 +5,15 @@ core_bundle_club:
 core_bundle_mail:
     resource: "@ARPCCoreBundle/Resources/config/routing_mail.yml"
     prefix: /mail
+
+login:
+    path:     /login
+    defaults: { _controller: ARPCCoreBundle:Security:login }
+
+login_check:
+    path:     /login_check
+    defaults: { _controller: ARPCCoreBundle:Security:login_check }
+    
+logout:
+    path:     /logout
+    defaults: { _controller: ARPCCoreBundle:Security:logout }
