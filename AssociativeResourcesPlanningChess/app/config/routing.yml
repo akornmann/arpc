@@ -6,6 +6,10 @@ core_bundle_mail:
     resource: "@ARPCCoreBundle/Resources/config/routing_mail.yml"
     prefix: /mail
 
+main_page:
+    path:   /
+    defaults: { _controller: ARPCCoreBundle:Club:index }
+
 login:
     path:     /login
     defaults: { _controller: ARPCCoreBundle:Security:login }

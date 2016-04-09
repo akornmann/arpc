@@ -87,14 +87,12 @@ class Player implements \Symfony\Component\Security\Core\User\UserInterface
     private $roles;
     
     /**
-     * @var type 
+     * @var type
+     *
+     * @ORM\Column(type="string", length=64)
      */
     private $password;
     
-    /**
-     * @var type 
-     */
-    private $salt;
     
     /**
      * Constructor
@@ -115,7 +113,7 @@ class Player implements \Symfony\Component\Security\Core\User\UserInterface
      */
     public function getRoles()
     {
-        return $this->roles;
+        return array("ROLE_USER");
     }
         
     /**
@@ -123,7 +121,7 @@ class Player implements \Symfony\Component\Security\Core\User\UserInterface
      */
     public function getPassword()
     {
-        return $this->password;    
+        return $this->password;
     }
     
     /**
@@ -131,7 +129,7 @@ class Player implements \Symfony\Component\Security\Core\User\UserInterface
      */
     public function getSalt()
     {
-        return $this->salt;
+        return null;
     }
     
     /**
