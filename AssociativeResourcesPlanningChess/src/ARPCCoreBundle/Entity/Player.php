@@ -80,11 +80,6 @@ class Player implements \Symfony\Component\Security\Core\User\UserInterface
      * @ORM\ManyToMany(targetEntity="ARPCCoreBundle\Entity\ContactWay", cascade={"persist", "remove"})
      */
     private $contactWays;
-
-    /**
-     * @var type 
-     */
-    private $roles;
     
     /**
      * @var type
