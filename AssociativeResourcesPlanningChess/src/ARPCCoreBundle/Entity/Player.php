@@ -101,11 +101,6 @@ class Player implements \Symfony\Component\Security\Core\User\UserInterface
     {
         $this->birthday = new \DateTime();
         $this->contactWays = new \Doctrine\Common\Collections\ArrayCollection();
-        
-        // Default role
-        $this->roles = array("ROLE_USER");
-        $this->salt = null;
-        $this->password = '$2a$08$jHZj/wJfcVKlIwr5AvR78euJxYK7Ku5kURNhNx.7.CSIJ3Pq6LEPC';
     }
     
     /**
