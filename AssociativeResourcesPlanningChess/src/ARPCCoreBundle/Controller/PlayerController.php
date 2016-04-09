@@ -66,16 +66,7 @@ class PlayerController extends Controller
         return $this->render('ARPCCoreBundle:Player:details.html.twig', array(
             'player' => $player,));
     }
-    
-    public function showAllAction()
-    {
-        $clubCode = $this->get('arpc.environnement')->getClub();
-        $players =$this->getDoctrine()->getRepository('ARPCCoreBundle:Player')->findAllPlayersByClub($clubCode);
         
-        return $this->render('ARPCCoreBundle:Player:list.html.twig', array(
-            'players' => $players,));
-    }
-    
     public function importAction()
     {        
         $importer = $this->get('arpc.player_csv_import');

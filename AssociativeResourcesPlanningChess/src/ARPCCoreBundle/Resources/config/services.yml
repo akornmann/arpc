@@ -5,8 +5,8 @@ services:
 
     arpc.environnement:
         class: ARPCCoreBundle\Services\Environnement\ARPCEnvironnement
-        arguments: []
+        arguments: ['@security.authorization_checker','@security.token_storage']
 
     arpc.player_csv_import:
         class: ARPCCoreBundle\Services\Csv\PlayerCsvImport
-        arguments: ["@doctrine.orm.entity_manager"]
+        arguments: ['@doctrine.orm.entity_manager']

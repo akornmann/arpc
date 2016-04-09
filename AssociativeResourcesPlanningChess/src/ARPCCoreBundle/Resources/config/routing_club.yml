@@ -2,9 +2,17 @@ club_main:
     path:     /
     defaults: { _controller: ARPCCoreBundle:Club:index }
     
-club_show_player_list:
+club_show_players:
     path:     /players
-    defaults: { _controller: ARPCCoreBundle:Player:showAll }
+    defaults: { _controller: ARPCCoreBundle:Club:players }
+    
+club_show_events:
+    path:     /events
+    defaults: { _controller: ARPCCoreBundle:Club:events }
+
+club_show_teams:
+    path: /teams
+    defaults: { _controller: ARPCCoreBundle:Club:teams }
     
 club_import_player_list:
     path:     /player/import
