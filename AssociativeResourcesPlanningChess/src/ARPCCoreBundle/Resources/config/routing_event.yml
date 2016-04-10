@@ -1,0 +1,9 @@
+event_add_team_event:
+    path:     /add-team
+    defaults: { _controller: ARPCCoreBundle:Event:addTeamEvent }
+    
+event_add_match:
+    path:     /add-match/{teamId}
+    defaults: { _controller: ARPCCoreBundle:Event:addMatch }
+    requirements:
+        id: \d+

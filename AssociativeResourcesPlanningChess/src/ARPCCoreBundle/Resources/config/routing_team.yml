@@ -1,0 +1,5 @@
+team_main:
+    path:     /{id}
+    defaults: { _controller: ARPCCoreBundle:Team:index }
+    requirements:
+        id: \d+

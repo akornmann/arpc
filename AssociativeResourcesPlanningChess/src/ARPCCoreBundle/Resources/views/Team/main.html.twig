@@ -1,0 +1,9 @@
+{# src/ARPCCoreBundle/Resources/views/Team/main.html.twig #}
+
+{% extends "ARPCCoreBundle::index.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ team.name }} {% endblock %}
+
+{% block body %}
+    {{ include('ARPCCoreBundle:Team:show.html.twig', { 'team' : team }) }}
+{% endblock %}

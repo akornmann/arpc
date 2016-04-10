@@ -25,7 +25,7 @@ class PlayerController extends Controller
             $em->persist($player);
             $em->flush();
 
-            return $this->redirectToRoute('club_show_player_list');
+            return $this->redirectToRoute('club_show_players');
         }
         
         return $this->render('ARPCCoreBundle:Player:add.html.twig', array(

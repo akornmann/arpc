@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="event")
  * @ORM\Entity(repositoryClass="ARPCCoreBundle\Repository\EventRepository")
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * @ORM\DiscriminatorMap({"event" = "ARPCCoreBundle\Entity\Event", "team_event" = "ARPCCoreBundle\Entity\TeamEvent"})
  */
 class Event
 {

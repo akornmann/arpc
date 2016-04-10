@@ -1,7 +1,15 @@
 core_bundle_club:
     resource: "@ARPCCoreBundle/Resources/config/routing_club.yml"
     prefix: /club
-    
+
+core_bundle_event:
+    resource: "@ARPCCoreBundle/Resources/config/routing_event.yml"
+    prefix: /event
+        
+core_bundle_team:
+    resource: "@ARPCCoreBundle/Resources/config/routing_team.yml"
+    prefix: /team
+        
 core_bundle_mail:
     resource: "@ARPCCoreBundle/Resources/config/routing_mail.yml"
     prefix: /mail

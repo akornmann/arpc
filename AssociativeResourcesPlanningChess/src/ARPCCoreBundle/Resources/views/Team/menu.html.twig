@@ -1,0 +1,9 @@
+{# src/ARPCCoreBundle/Resources/views/Team/menu.html.twig #}
+
+{% for team in teams %}
+  <li>
+    <a href="{{ path('team_main', {'id' : team.id}) }}">
+      {{ team.name }}
+    </a>
+  </li>
+{% endfor %}

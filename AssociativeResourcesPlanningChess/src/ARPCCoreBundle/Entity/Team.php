@@ -36,6 +36,21 @@ class Team
     private $club;
 
     /**
+     * @var TeamEvent
+     * 
+     * @ORM\ManyToMany(targetEntity="ARPCCoreBundle\Entity\TeamEvent", cascade={"persist", "remove"})
+     */
+    private $teamEvents;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->teamEvents = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -92,5 +107,38 @@ class Team
     {
         return $this->club;
     }
-}
+    
+    /**
+     * Add teamEvent
+     *
+     * @param \ARPCCoreBundle\Entity\TeamEvent $teamEvent
+     *
+     * @return Team
+     */
+    public function addTeamEvent(\ARPCCoreBundle\Entity\TeamEvent $teamEvent)
+    {
+        $this->teamEvents[] = $teamEvent;
 
+        return $this;
+    }
+
+    /**
+     * Remove teamEvent
+     *
+     * @param \ARPCCoreBundle\Entity\TeamEvent $teamEvent
+     */
+    public function removeTeamEvent(\ARPCCoreBundle\Entity\TeamEvent $teamEvent)
+    {
+        $this->teamEvents->removeElement($teamEvent);
+    }
+
+    /**
+     * Get teamEvents
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeamEvents()
+    {
+        return $this->teamEvents;
+    }
+}

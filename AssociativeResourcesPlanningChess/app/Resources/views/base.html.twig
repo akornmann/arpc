@@ -80,6 +80,12 @@
                                 </ul>
                             </li>
                             <li>
+                                <a href="#"><i class="fa fa-fw"></i> Equipes<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    {{ render(controller("ARPCCoreBundle:Team:menu")) }}
+                                </ul>
+                            </li>
+                            <li>
                                 <a href="{{ path('login') }}">Login</a>
                             </li>
                             <li>
