@@ -9,7 +9,7 @@ class TeamController extends Controller
 {
     public function menuAction()
     {
-        $clubCode = $this->get('arpc.environnement')->getClub();
+        $clubCode = $this->get('arpc.environnement')->getClub()->getCode();
         
         $repository = $this->getDoctrine()->getRepository('ARPCCoreBundle:Team');
         $teams = $repository->findAllTeamsByClub($clubCode);
