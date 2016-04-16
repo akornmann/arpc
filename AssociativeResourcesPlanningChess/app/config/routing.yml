@@ -9,6 +9,10 @@ core_bundle_event:
 core_bundle_team:
     resource: "@ARPCCoreBundle/Resources/config/routing_team.yml"
     prefix: /team
+
+core_bundle_player:
+    resource: "@ARPCCoreBundle/Resources/config/routing_player.yml"
+    prefix: /player
         
 core_bundle_mail:
     resource: "@ARPCCoreBundle/Resources/config/routing_mail.yml"

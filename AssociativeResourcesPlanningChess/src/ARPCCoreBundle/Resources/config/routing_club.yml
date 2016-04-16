@@ -1,39 +1,33 @@
-club_main:
+club_index:
     path:     /
     defaults: { _controller: ARPCCoreBundle:Club:index }
-    
-club_show_players:
+
+club_add:
+    path:     /add
+    defaults: { _controller: ARPCCoreBundle:Club:add }
+
+club_players:
     path:     /players
     defaults: { _controller: ARPCCoreBundle:Club:players }
-    
-club_show_events:
+
+club_events:
     path:     /events
     defaults: { _controller: ARPCCoreBundle:Club:events }
 
-club_show_teams:
-    path: /teams
+club_teams:
+    path:     /teams
     defaults: { _controller: ARPCCoreBundle:Club:teams }
-    
-club_import_player_list:
-    path:     /player/import
-    defaults: { _controller: ARPCCoreBundle:Player:import }
-    
-club_add_player:
-    path:     /player/add
-    defaults: { _controller: ARPCCoreBundle:Player:add }
-    
-club_edit_player:
-    path:     /player/edit/{id}
-    defaults: { _controller: ARPCCoreBundle:Player:edit }
+
+club_edit:
+    path:     /edit/{code}
+    defaults: { _controller: ARPCCoreBundle:Club:edit }
+
+club_show_id:
+    path:     /{id}
+    defaults: { _controller: ARPCCoreBundle:Club:showId }
     requirements:
         id: \d+
 
-club_show_player:
-    path:     /player/{id}
-    defaults: { _controller: ARPCCoreBundle:Player:show }
-    requirements:
-        id: \d+
-    
-club_send_mail:
-    path:     /mail
-    defaults: { _controller: ARPCCoreBundle:Player:sendMail }
+club_show:
+    path:     /{code}
+    defaults: { _controller: ARPCCoreBundle:Club:showCode }

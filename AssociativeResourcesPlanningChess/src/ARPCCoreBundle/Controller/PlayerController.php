@@ -10,89 +10,118 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class PlayerController extends Controller
 {
+    //------- Actions -------//
+
+    /**
+     * Show currently log in player
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexAction()
+    {
+        $player = $this->get('arpc.environnement')->getPlayer();
+
+        return $this->viewPlayer($player);
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function addAction(Request $request)
     {
         $player = new Player();
 
-        $form = $this->createForm(PlayerType::class, $player);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($player);
-            $em->flush();
-
-            return $this->redirectToRoute('club_show_players');
-        }
-        
-        return $this->render('ARPCCoreBundle:Player:add.html.twig', array(
-            'form' => $form->createView(),));
+        return $this->persistPlayer($player, $request);
     }
-    
-    public function editAction($id, Request $request)
+
+    /**
+     * @param $code
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction($code, Request $request)
     {
-        $player = $this->getDoctrine()->getRepository('ARPCCoreBundle:Player')->find($id);
+        $player = $this->getRepository()->findOneByFfeCode($code);
 
-        $form = $this->createForm(PlayerType::class, $player);
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid())
-        {
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($player);
-            $em->flush();
-
-            return $this->redirectToRoute('club_show_player', array('id' => $player->getId()));
-        }
-        
-        return $this->render('ARPCCoreBundle:Player:add.html.twig', array(
-            'form' => $form->createView(),));
+        return $this->persistPlayer($player, $request);
     }
-    
-    public function showAction($id)
+
+    /**
+     * Show a player using id
+     *
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showIdAction($id)
     {
-        $player = $this->getDoctrine()->getRepository('ARPCCoreBundle:Player')->find($id);
-        
+        $player = $this->getRepository()->find($id);
+
+        return $this->viewPlayer($player);
+    }
+
+    /**
+     * Show a player using Ffe code
+     *
+     * @param $code
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function showCodeAction($code)
+    {
+        $player = $this->getRepository()->findOneByFfeCode($code);
+
+        return $this->viewPlayer($player);
+    }
+
+    //------- Private -------//
+
+    /**
+     * Shortcut for Player repository
+     *
+     * @return \Doctrine\Common\Persistence\ObjectRepository
+     */
+    private function getRepository()
+    {
+        return $this->getDoctrine()->getRepository('ARPCCoreBundle:Player');
+    }
+
+    /**
+     * @param $player
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    private function viewPlayer($player)
+    {
         if(!$player)
         {
-            throw $this->createNotFoundException('No player found for id '.$id);
+            throw $this->createNotFoundException('Error while retrieving player');
         }
-        
-        return $this->render('ARPCCoreBundle:Player:details.html.twig', array(
-            'player' => $player,));
-    }
-        
-    public function importAction()
-    {        
-        $importer = $this->get('arpc.player_csv_import');
-        $importer->import('test.csv');
-        
-        $players =$this->getDoctrine()->getRepository('ARPCCoreBundle:Player')->findAll();
-        return $this->render('ARPCCoreBundle:Player:list.html.twig', array(
-             'players' => $players,)); 
-    }
-    
-    public function sendMailAction()
-    {
-        $mailSender = $this->get('arpc.environnement')->getMailSender();
-        
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Hello Email')
-            ->setTo('kornmannalexandre@free.fr')
-            ->setFrom($mailSender)
-            ->setBody('okkk');
-        
-        $this->get('mailer')->send($message);
 
-        $clubCode = $this->get('arpc.environnement')->getClub();
-        $club = $this->getDoctrine()->getRepository('ARPCCoreBundle:Club')->findClubByCode($clubCode);
-                
-        return $this->render('ARPCCoreBundle:Club:main.html.twig', array(
-            'club' => $club));
+        return $this->render('ARPCCoreBundle:Player:details.html.twig',
+            array('player' => $player));
+    }
+
+    /**
+     * @param Player $player
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    private function persistPlayer(Player $player, Request $request)
+    {
+        $form = $this->createForm(PlayerType::class, $player);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($player);
+            $em->flush();
+
+            return viewPlayer($player);
+        }
+
+        return $this->render('ARPCCoreBundle:Player:add.html.twig', array(
+            'form' => $form->createView()));
     }
 }

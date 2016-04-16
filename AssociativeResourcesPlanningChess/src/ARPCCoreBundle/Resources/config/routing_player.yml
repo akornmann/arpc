@@ -1,0 +1,21 @@
+player_index:
+    path:     /
+    defaults: { _controller: ARPCCoreBundle:Player:index }
+
+player_add:
+    path:     /add
+    defaults: { _controller: ARPCCoreBundle:Player:add }
+
+player_edit:
+    path:     /edit/{code}
+    defaults: { _controller: ARPCCoreBundle:Player:edit }
+
+player_show_id:
+    path:     /{id}
+    defaults: { _controller: ARPCCoreBundle:Player:showId }
+    requirements:
+        id: \d+
+
+player_show:
+    path:     /{code}
+    defaults: { _controller: ARPCCoreBundle:Player:showCode }

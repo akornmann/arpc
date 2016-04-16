@@ -16,8 +16,7 @@ class ARPCEnvironnement
         $this->authorizationChecker = $authorizationChecker;
         $this->tokenStorage = $tokenStorage;
     }
-    
-    
+
     public function getClub()
     {
         if (!$this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY'))
@@ -26,8 +25,20 @@ class ARPCEnvironnement
         }
 
         $user = $this->tokenStorage->getToken()->getUser();
-        
-        return $user->getClub()->getCode();
+
+        return $user->getClub();
+    }
+
+    public function getPlayer()
+    {
+        if (!$this->authorizationChecker->isGranted('IS_AUTHENTICATED_FULLY'))
+        {
+            throw new AccessDeniedException();
+        }
+
+        $user = $this->tokenStorage->getToken()->getUser();
+
+        return $user;
     }
     
     public function getFederation()

@@ -40,7 +40,7 @@
                                         <td>{{ player.surname }}</td>
                                         <td>{{ player.ffeCode }}</td>
                                         <td>{{ player.fideCode }}</td>
-                                        <td><a href="{{ path('club_show_player', {'id' : player.id}) }}">Details</a></td>
+                                        <td><a href="{{ path('player_show', {'code' : player.ffeCode}) }}">Details</a></td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

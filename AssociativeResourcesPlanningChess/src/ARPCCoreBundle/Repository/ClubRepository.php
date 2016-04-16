@@ -10,13 +10,4 @@ namespace ARPCCoreBundle\Repository;
  */
 class ClubRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findClubByCode($clubCode)
-    {
-        $qb = $this
-            ->createQueryBuilder('club')
-            ->where('club.code = :code')
-            ->setParameter('code', $clubCode);
-        
-        return $qb->getQuery()->getSingleResult();
-    }
 }

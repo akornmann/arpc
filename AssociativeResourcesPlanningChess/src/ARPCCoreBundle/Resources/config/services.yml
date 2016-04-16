@@ -10,3 +10,7 @@ services:
     arpc.player_csv_import:
         class: ARPCCoreBundle\Services\Csv\PlayerCsvImport
         arguments: ['@doctrine.orm.entity_manager']
+        
+    arpc.sms_sender:
+        class: ARPCCoreBundle\Services\SMS\SMSSender
+        arguments:
