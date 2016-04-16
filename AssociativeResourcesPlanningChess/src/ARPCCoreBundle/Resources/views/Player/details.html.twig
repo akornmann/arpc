@@ -30,7 +30,7 @@
                         <div class="panel-body">
                             <p>{{ player.name }} {{ player.surname }}</p>
                             <p>FFE code {{ player.ffeCode }}</p>
-                            <p>FIDE code {{ player.fideCode }}</p>
+                            <p>FIDE code <a href="{{ player.fideCode | fideLink }}">{{ player.fideCode }}</a></p>
                         </div>
                     </div>
                     {% if player.adress %}

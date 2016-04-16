@@ -14,3 +14,10 @@ services:
     arpc.sms_sender:
         class: ARPCCoreBundle\Services\SMS\SMSSender
         arguments:
+
+    arpc.twig.fidefilter_extension:
+        class: ARPCCoreBundle\Twig\Extension\FideFilterExtention
+        arguments:
+        public: false
+        tags:
+            - { name: twig.extension }

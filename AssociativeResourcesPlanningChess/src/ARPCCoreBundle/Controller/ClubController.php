@@ -148,7 +148,7 @@ class ClubController extends Controller
             $em->persist($club);
             $em->flush();
 
-            return viewClub($club);
+            return $this->viewClub($club);
         }
 
         return $this->render('ARPCCoreBundle:Club:add.html.twig', array(

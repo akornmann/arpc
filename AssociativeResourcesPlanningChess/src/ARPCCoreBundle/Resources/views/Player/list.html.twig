@@ -27,20 +27,19 @@
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Surname</th>
                                     <th>FFE Code</th>
                                     <th>FIDE Code</th>
-                                    <th></th>
+                                    <th>Club</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for player in players %}
-                                    <tr class="odd">
-                                        <td>{{ player.name }}</td>
-                                        <td>{{ player.surname }}</td>
+                                {% if loop.index is odd %}<tr class="odd">{% endif %}
+                                {% if loop.index is even %}<tr class="even">{% endif %}
+                                        <td><a href="{{ path('player_show', {'code' : player.ffeCode}) }}">{{ player.name }} {{ player.surname }}</a></td>
                                         <td>{{ player.ffeCode }}</td>
-                                        <td>{{ player.fideCode }}</td>
-                                        <td><a href="{{ path('player_show', {'code' : player.ffeCode}) }}">Details</a></td>
+                                        <td><a href="{{ player.fideCode | fideLink }}">{{ player.fideCode }}</a></td>
+                                        <td>{{ player.club.label }}</td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

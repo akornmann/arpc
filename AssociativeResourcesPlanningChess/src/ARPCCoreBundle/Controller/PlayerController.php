@@ -118,7 +118,7 @@ class PlayerController extends Controller
             $em->persist($player);
             $em->flush();
 
-            return viewPlayer($player);
+            return $this->viewPlayer($player);
         }
 
         return $this->render('ARPCCoreBundle:Player:add.html.twig', array(
