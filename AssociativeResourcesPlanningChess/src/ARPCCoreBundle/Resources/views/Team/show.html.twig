@@ -1,17 +1,57 @@
 {# src/ARPCCoreBundle/Resources/views/Team/show.html.twig #}
 
-<div class="col-lg-10 col-lg-offset-1">
-    <div class="panel panel-primary">
+{% extends "ARPCCoreBundle:Team:main.html.twig" %}
+
+{% block title %}{{ parent() }} - {{ team.name }}{% endblock %}
+
+{% block body %}
+
+<div class="col-lg-12">
+    <div class="panel panel-default">
         <div class="panel-heading">
-            <span class="text-center"><h2>{{ team.name }}</h2></span>
+            <span class="text-center"><h4>{{ team.name }} - {{ team.club.label }}</h4></span>
         </div>
         <div class="panel-body">
-            {% for teamEvent in team.teamEvents %}
-                {{ include('ARPCCoreBundle:Event:team-event-show.html.twig', { 'teamEvent': teamEvent }) }}
-            {% endfor %}
+            <div class="col-lg-6">
+                {% for teamEvent in team.teamEvents %}
+                    {{ include('ARPCCoreBundle:Event:team-event-show.html.twig', { 'teamEvent': teamEvent, 'number': loop.index }) }}
+                {% endfor %}
+            </div>
+            <div class="col-lg-6">
+                {% for player in team.involvedPlayers %}
+                    {{ include('ARPCCoreBundle:Player:show-inline.html.twig') }}<br/>
+                {% endfor %}
+            </div>
         </div>
         <div class="panel-footer">
             <a href="{{ path('event_add_match', {'teamId' : team.id}) }}">Add match</a>
         </div>
     </div>
 </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".toggle-content").hide();
+
+            $(".toggle-trigger").click(function()
+            {
+                $(this).parent().siblings(".toggle-content").toggle(400);
+                if($(this).hasClass("glyphicon-arrow-down"))
+                {
+                    $(this).removeClass("glyphicon-arrow-down");
+                    $(this).addClass("glyphicon-arrow-up");
+                }
+                else
+                {
+                    $(this).removeClass("glyphicon-arrow-up");
+                    $(this).addClass("glyphicon-arrow-down");
+                }
+            });
+        });
+    </script>
+{% endblock %}

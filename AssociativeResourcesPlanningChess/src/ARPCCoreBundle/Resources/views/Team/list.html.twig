@@ -1,6 +1,6 @@
 {# src/ARPCCoreBundle/Resources/views/Team/list.html.twig #}
 
-{% extends "ARPCCoreBundle::index.html.twig" %}
+{% extends "ARPCCoreBundle:Team:main.html.twig" %}
 
 {% block css %}
     {{ parent() }}
@@ -12,7 +12,7 @@
     <link href="{{ asset('bower_components/datatables-responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
 {% endblock %}
 
-{% block title %}{{ parent() }} - Liste des évenements{% endblock %}
+{% block title %}{{ parent() }} - Liste des &eacute;quipes{% endblock %}
 
 {% block body %}    
     <div class="row">
